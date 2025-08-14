@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GasTwinFormer: Livestock Methane Emission Segmentation and Diet Classification</title>
+  <meta name="description" content="GasTwinFormer: A Hybrid Vision Transformer for methane emission segmentation and diet classification in OGI." />
+
+  <!-- Typography -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
+
+  <!-- Nerfies (Bulma) -->
+  <link rel="stylesheet" href="./static/css/bulma.min.css" />
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
+  <link rel="stylesheet" href="./static/css/nerfies.css" />
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+
+  <!-- ReconFusion (Bootstrap utilities for some widgets) -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./vendor/reconfusion/css/app.css" />
+
+  <link rel="icon" href="./assets/teaser.svg" />
+
+  <style>
+    /* Increase icon sizes on homepage */
+    .button .icon {
+      font-size: 1.35rem;
+    }
+
+    .icon-link i {
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- ReconFusion-style Title, Authors, Affiliations, and Links -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="row">
+          <h2 class="col-md-12 text-center">
+            <b>GasTwinFormer</b>: A Hybrid Vision Transformer for Livestock Methane Emission Segmentation and Dietary Classification in Optical Gas Imaging
+          </h2>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-3"></div>
+          <div class="col-md-6 text-center">
+            <ul class="list-inline">
+              <li>Toqi Tahamid Sarker<sup>1</sup>*</li>
+              <li>Mohamed G Embaby<sup>2</sup>*</li>
+              <li>Taminul Islam<sup>1</sup></li>
+              <li>Amer AbuGhazaleh<sup>2</sup></li>
+              <li>Khaled R Ahmed<sup>1</sup></li>
+            </ul>
+          </div>
+          <div class="col-md-3"></div>
+          <div class="col-md-12 text-center">
+            <sup>1</sup>School of Computing, <sup>2</sup>School of Agricultural Sciences — Southern Illinois University, Carbondale, USA &nbsp; &nbsp; * equal contribution
+          </div>
+          <div class="col-md-12 text-center">
+            ICCV 2025
+          </div>
+        </div>
+
+        <div class="row text-center" style="margin-top:10px">
+          <span class="link-block">
+            <a href="#" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
+              <span class="icon"><i class="ai ai-arxiv"></i></span>
+              <span>arXiv</span>
+            </a>
+            <a href="https://github.com/toqitahamid/GasTwinFormer" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
+              <span class="icon"><i class="fab fa-github"></i></span>
+              <span>Code</span>
+            </a>
+            <a href="./assets/paper.pdf" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span>
+              <span>Paper</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method Summary -->
+  <section class="section" id="method">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Method Summary</h2>
+      <div class="content">
+        <ul>
+          <li><strong>Mix Twin Encoder</strong>: Alternates spatially-reduced global attention with locally-grouped self-attention to balance global context and local detail.</li>
+          <li><strong>LR-ASPP Decoder</strong>: Lightweight multi-scale aggregation using encoder features (F1+F2+F3) for precise plume boundaries at real-time speed.</li>
+          <li><strong>Multi-task Head</strong>: Joint methane segmentation and dietary classification in one network.</li>
+          <li><strong>Optimized Design</strong>: Best attention pattern EL-EL-EL-EL, LSA window 5×5, Gaussian Plume loss for segmentation.</li>
+        </ul>
+      </div>
+      <div class="columns is-multiline">
+        <div class="column is-one-third">
+          <div class="box">
+            <p class="heading">Parameters</p>
+            <p class="title is-4">3.348M</p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <p class="heading">FLOPs</p>
+            <p class="title is-4">3.428G</p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <p class="heading">Speed</p>
+            <p class="title is-4">114.9 FPS</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ReconFusion-style centered teaser -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths has-text-centered">
+          <img src="./assets/gastwinformer.png" alt="GasTwinFormer architecture" style="width:100%; max-width:1100px;" />
+          <p class="has-text-grey" style="margin-top:8px">GasTwinFormer architecture overview.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nerfies-layout Abstract -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Livestock methane emissions represent 32% of human-caused methane production, making automated monitoring critical for climate mitigation strategies. We introduce GasTwinFormer, a hybrid vision transformer for real-time methane emission segmentation and dietary classification in optical gas imaging through a novel Mix Twin encoder alternating between spatially-reduced global attention and locally-grouped attention mechanisms. Our architecture incorporates a lightweight LR-ASPP decoder for multi-scale feature aggregation and enables simultaneous methane segmentation and dietary classification in a unified framework. We contribute the first comprehensive beef cattle methane emission dataset using OGI, containing 11,694 annotated frames across three dietary treatments. GasTwinFormer achieves 74.47% mIoU and 83.63% mF1 for segmentation while maintaining exceptional efficiency with only 3.348M parameters, 3.428G FLOPs, and 114.9 FPS inference speed. Additionally, our method achieves perfect dietary classification accuracy (100%), demonstrating the effectiveness of leveraging diet-emission correlations. Extensive ablation studies validate each architectural component, establishing GasTwinFormer as a practical solution for real-time livestock emission monitoring.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ReconFusion-style media row (swap videos/images as available) -->
+  <section class="section" id="results">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Results</h2>
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content">
+            <h3 class="title is-4">Segmentation</h3>
+            <p><strong>mIoU:</strong> 74.47% &nbsp; <strong>mF1:</strong> 83.63%</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h3 class="title is-4">Efficiency</h3>
+            <p><strong>Params:</strong> 3.348M &nbsp; <strong>FLOPs:</strong> 3.428G &nbsp; <strong>FPS:</strong> 114.9</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h3 class="title is-4">Diet Classification</h3>
+            <p><strong>Accuracy:</strong> 100%</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content" style="margin-top:24px">
+        <h3 class="title is-4">Qualitative Visualizations</h3>
+        <p class="has-text-justified">Methane plume segmentation overlays across diets: MD (mixed diet), HG (high grain), HF (high forage). Methods: Ground Truth, BiSeNetV2, UperNet, GasFormer, SegFormer, Twins PCPVT-S, GasTwinFormer.</p>
+        <div class="columns">
+          <div class="column">
+            <h4 class="title is-5">MD</h4>
+            <div class="columns is-multiline is-variable is-1">
+              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_ground_truth_overlay.png" alt="MD GT"/></div>
+              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_bisennetv2_overlay.png" alt="MD BiSeNetV2"/></div>
+              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_upernet_overlay.png" alt="MD UperNet"/></div>
+              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_gasformer_overlay.png" alt="MD GasFormer"/></div>
+              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_segformer_overlay.png" alt="MD SegFormer"/></div>
+              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_twins_pcpvt_overlay.png" alt="MD Twins PCPVT"/></div>
+              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_gastwinformer_overlay.png" alt="MD GasTwinFormer"/></div>
+            </div>
+          </div>
+          <div class="column">
+            <h4 class="title is-5">HG</h4>
+            <div class="columns is-multiline is-variable is-1">
+              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_ground_truth_overlay.png" alt="HG GT"/></div>
+              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_bisennetv2_overlay.png" alt="HG BiSeNetV2"/></div>
+              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_upernet_overlay.png" alt="HG UperNet"/></div>
+              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_gasformer_overlay.png" alt="HG GasFormer"/></div>
+              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_segformer_overlay.png" alt="HG SegFormer"/></div>
+              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_twins_pcpvt_overlay.png" alt="HG Twins PCPVT"/></div>
+              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_gastwinformer_overlay.png" alt="HG GasTwinFormer"/></div>
+            </div>
+          </div>
+          <div class="column">
+            <h4 class="title is-5">HF</h4>
+            <div class="columns is-multiline is-variable is-1">
+              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_ground_truth_overlay.png" alt="HF GT"/></div>
+              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_bisennetv2_overlay.png" alt="HF BiSeNetV2"/></div>
+              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_upernet_overlay.png" alt="HF UperNet"/></div>
+              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_gasformer_overlay.png" alt="HF GasFormer"/></div>
+              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_segformer_overlay.png" alt="HF SegFormer"/></div>
+              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_twins_pcpvt_overlay.png" alt="HF Twins PCPVT"/></div>
+              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_gastwinformer_overlay.png" alt="HF GasTwinFormer"/></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dataset -->
+  <section id="dataset" class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Dataset</h2>
+      <div class="content">
+        <p>Beef cattle methane emission dataset captured with a TELEDYNE FLIR Gx320 OGI camera in black-hot thermal mode, annotated for methane plume segmentation and labeled by dietary treatment.</p>
+      </div>
+
+      <div class="columns is-multiline">
+        <div class="column is-half">
+          <table class="table is-fullwidth is-striped is-hoverable">
+            <thead>
+              <tr><th colspan="2">Overview</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Total frames</td><td>208,149</td></tr>
+              <tr><td>Annotated plume frames</td><td>11,694 (5.6%)</td></tr>
+              <tr><td>Total videos</td><td>19</td></tr>
+              <tr><td>Animals</td><td>12 beef cattle</td></tr>
+              <tr><td>Frame resolution</td><td>640×480 (PNG)</td></tr>
+              <tr><td>Frame rate</td><td>30 FPS</td></tr>
+              <tr><td>Spectral range</td><td>3.2–3.4 μm</td></tr>
+              <tr><td>Thermal sensitivity</td><td>&lt; 15 mK</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="column is-half">
+          <table class="table is-fullwidth is-striped is-hoverable">
+            <thead>
+              <tr><th colspan="4">Distribution by Dietary Treatment</th></tr>
+              <tr>
+                <th>Diet</th><th>Images</th><th>Videos</th><th>Train / Val / Test</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>High Forage (HF)</td><td>2,730 (23.4%)</td><td>10</td><td>1,906 / 404 / 420</td></tr>
+              <tr><td>Mixed Diet (MD)</td><td>4,658 (39.8%)</td><td>5</td><td>3,258 / 696 / 704</td></tr>
+              <tr><td>High Grain (HG)</td><td>4,306 (36.8%)</td><td>4</td><td>3,013 / 644 / 649</td></tr>
+              <tr><td><strong>Total</strong></td><td><strong>11,694</strong></td><td><strong>19</strong></td><td><strong>8,177 / 1,744 / 1,773</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="content">
+        <ul>
+          <li><strong>Splitting</strong>: Temporal per-video split (70%/15%/15%) to evaluate on future time points.</li>
+          <li><strong>Annotations</strong>: Multi-stage pipeline combining classical processing, GasFormer refinement, and manual selection of best overlay masks.</li>
+          <li><strong>Format</strong>: 8-bit grayscale PNGs (0–255) with methane plume overlays for visualization.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BibTeX -->
+  <section id="bibtex" class="section">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{Sarker2025GasTwinFormer,
+  title={GasTwinFormer: A Hybrid Vision Transformer for Livestock Methane Emission Segmentation and Dietary Classification in Optical Gas Imaging},
+  author={Sarker, Toqi Tahamid and Embaby, Mohamed G and Islam, Taminul and AbuGhazaleh, Amer and Ahmed, Khaled R},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="./assets/paper.pdf"><i class="fas fa-file-pdf"></i></a>
+        <a class="icon-link" href="https://github.com/toqitahamid/GasTwinFormer" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              Inspired by designs from <a href="https://nerfies.github.io">Nerfies</a> and <a href="https://reconfusion.github.io">ReconFusion</a>. Please remove analytics if reusing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/bulma-carousel.min.js"></script>
+  <script defer src="./static/js/bulma-slider.min.js"></script>
+  <script defer src="./static/js/nerfies.js"></script>
+  <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script defer src="./vendor/reconfusion/js/app.js"></script>
+  <script defer src="./vendor/reconfusion/js/synced_video_selector.js"></script>
+</body>
+</html>

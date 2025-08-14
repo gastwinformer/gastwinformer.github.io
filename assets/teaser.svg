@@ -1,0 +1,41 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'>
+  <defs>
+    <linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>
+      <stop offset='0%' stop-color='#4cc9f0'/>
+      <stop offset='100%' stop-color='#118ab2'/>
+    </linearGradient>
+  </defs>
+  <rect x='0' y='0' width='1600' height='900' fill='#0d0f14'/>
+  <g transform='translate(120,120)'>
+    <rect x='0' y='0' width='1360' height='660' rx='20' fill='#151923' stroke='#232838'/>
+    <text x='40' y='80' fill='#e6e9ef' font-family='Inter, -apple-system, system-ui, Arial' font-size='44' font-weight='800'>GasTwinFormer</text>
+    <text x='40' y='130' fill='#9aa0aa' font-family='Inter, -apple-system, system-ui, Arial' font-size='22'>Hybrid ViT for methane emission segmentation + diet classification</text>
+    
+    <g transform='translate(40,200)'>
+      <rect x='0' y='0' width='620' height='420' rx='14' fill='url(#g)' opacity='0.15'/>
+      <rect x='0' y='0' width='620' height='420' rx='14' fill='none' stroke='#2a2f40'/>
+      <text x='20' y='40' fill='#e6e9ef' font-size='22' font-family='Inter, -apple-system, system-ui, Arial'>Mix Twin Encoder</text>
+      <text x='20' y='78' fill='#9aa0aa' font-size='18' font-family='Inter, -apple-system, system-ui, Arial'>Global + Local attention</text>
+    </g>
+
+    <g transform='translate(700,200)'>
+      <rect x='0' y='0' width='620' height='200' rx='14' fill='url(#g)' opacity='0.15'/>
+      <rect x='0' y='0' width='620' height='200' rx='14' fill='none' stroke='#2a2f40'/>
+      <text x='20' y='40' fill='#e6e9ef' font-size='22' font-family='Inter, -apple-system, system-ui, Arial'>LR-ASPP Decoder</text>
+      <text x='20' y='78' fill='#9aa0aa' font-size='18' font-family='Inter, -apple-system, system-ui, Arial'>Multi-scale aggregation</text>
+    </g>
+
+    <g transform='translate(700,430)'>
+      <rect x='0' y='0' width='300' height='190' rx='14' fill='url(#g)' opacity='0.15'/>
+      <rect x='0' y='0' width='300' height='190' rx='14' fill='none' stroke='#2a2f40'/>
+      <text x='20' y='40' fill='#e6e9ef' font-size='20' font-family='Inter, -apple-system, system-ui, Arial'>Segmentation</text>
+      <text x='20' y='80' fill='#9aa0aa' font-size='16' font-family='Inter, -apple-system, system-ui, Arial'>mIoU 74.47%  |  mF1 83.63%</text>
+    </g>
+    <g transform='translate(1020,430)'>
+      <rect x='0' y='0' width='300' height='190' rx='14' fill='url(#g)' opacity='0.15'/>
+      <rect x='0' y='0' width='300' height='190' rx='14' fill='none' stroke='#2a2f40'/>
+      <text x='20' y='40' fill='#e6e9ef' font-size='20' font-family='Inter, -apple-system, system-ui, Arial'>Diet Classification</text>
+      <text x='20' y='80' fill='#9aa0aa' font-size='16' font-family='Inter, -apple-system, system-ui, Arial'>Accuracy 100%</text>
+    </g>
+  </g>
+</svg>
