@@ -1,0 +1,39 @@
+
+\documentclass[border=0pt]{standalone}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\begin{document}
+\noindent\scriptsize
+\begin{tabular}{@{}l|cccc@{}}
+\toprule
+\textbf{Configuration} & \textbf{\makecell{mIoU\\(\%)$\uparrow$}} & \textbf{\makecell{Diet Acc.\\(\%)$\uparrow$}} & \textbf{\makecell{Params\\(M)$\downarrow$}} & \textbf{\makecell{FLOPs\\(G)$\downarrow$}} \\
+\midrule
+\multicolumn{5}{l}{\textit{Decoder Head Types}} \\
+\midrule
+All-MLP & 73.42 & 99.94 & 3.548 & 7.591 \\
+FCN Head & 71.23 & 99.94 & 3.416 & 7.303 \\
+ISA Head & 70.02 & \textbf{100.0} & 4.666 & \textbf{3.337} \\
+ANN Head & 70.67 & \textbf{100.0} & 5.599 & 3.695 \\
+LR-ASPP & \textbf{73.65} & \textbf{100.0} & \textbf{3.348} & 3.508 \\
+\midrule
+\multicolumn{5}{l}{\textit{LSA Feed-Forward Network}} \\
+\midrule
+Regular FFN & 72.07 & \textbf{100.0} & \textbf{3.065} & \textbf{3.471} \\
+MixFFN & \textbf{73.65} & \textbf{100.0} & 3.085 & 3.508 \\
+\midrule
+\multicolumn{5}{l}{\textit{LR-ASPP Multi-Scale Feature Fusion}} \\
+\midrule
+F1 only & 72.70 & \textbf{100.0} & \textbf{3.256} & 3.323 \\
+F1+F2 & 72.39 & \textbf{100.0} & 3.285 & 3.443 \\
+F2 only & 72.55 & \textbf{100.0} & 3.261 & 3.407 \\
+F2+F3 & 72.78 & \textbf{100.0} & 3.326 & 3.140 \\
+F1+F3 & 72.60 & \textbf{100.0} & 3.319 & 3.387 \\
+F3 only & 72.34 & \textbf{100.0} & 3.297 & \textbf{3.019} \\
+F1+F2+F3 & \textbf{73.65} & \textbf{100.0} & 3.348 & 3.508 \\
+\bottomrule
+\end{tabular}
+\end{document}
+    
+    

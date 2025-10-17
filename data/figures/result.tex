@@ -1,0 +1,50 @@
+
+
+
+\documentclass[border=0pt]{standalone}
+
+
+
+\usepackage{graphicx} % Required for inserting images
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{makecell}
+\usepackage{float}
+\usepackage{xcolor}
+
+
+\begin{document}
+\noindent\scriptsize
+% \setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}l|l|cccc|cc|c|c@{}}
+\toprule
+\textbf{Method} & \textbf{Backbone} & \textbf{\makecell{mIoU\\(\%)$\uparrow$}} & \textbf{\makecell{mF1\\(\%)$\uparrow$}} & \textbf{\makecell{Diet Acc\\(\%)$\uparrow$}} & \textbf{\makecell{Diet F1\\(\%)$\uparrow$}} & \textbf{\makecell{Params\\(M)$\downarrow$}} & \textbf{\makecell{FLOPs\\(G)$\downarrow$}} & \textbf{\makecell{FPS\\$\uparrow$}} & \textbf{Year} \\
+\midrule
+\multicolumn{10}{l}{\textit{Transformer-based Methods}} \\
+\midrule
+SegFormer & MiT-B0 & 72.11 & 81.57 & 100.0 & 100.0 & 3.782 & 7.885 & 119.66 & 2021 \\
+Twins & PCPVT-S & 74.05 & 83.25 & 100.0 & 100.0 & 27.906 & 44.34 & 61.60 & 2021 \\
+Twins & SVT-S & 72.06 & 81.62 & 100.0 & 100.0 & 27.846 & 38.471 & 51.64 & 2021 \\
+GasFormer & MiT-B0 & 72.25 & 81.69 & 100.0 & 100.0 & 3.716 & 9.913 & 102.29 & 2024 \\
+iFormer & iFormer-T & 65.99 & 75.87 & 99.77 & 99.80 & 6.804 & 24.267 & 113.83 & 2025 \\
+
+\midrule
+\multicolumn{10}{l}{\textit{CNN-based Methods}} \\
+\midrule
+DeepLabV3 & ResNet-50 & 70.36 & 80.03 & 100.0 & 100.0 & 68.625 & 270.0 & 91.79 & 2017 \\
+BiSeNetV1 & ResNet-18 & 52.87 & 59.29 & 95.32 & 95.76 & 13.455 & 14.821 & \textbf{243.07} & 2018 \\
+Fast-FCNN & FastSCNN & 54.01 & 61.09 & 97.01 & 96.95 & \textbf{1.488} & \textbf{0.927} & 225.79 & 2019 \\
+ICNet & ResNet-50 & 63.40 & 73.04 & 100.0 & 100.0 & 47.859 & 15.426 & 138.55 & 2018 \\
+UperNet & ResNet-50 & 70.67 & 80.32 & 100.0 & 100.0 & 66.927 & 237.0 & 85.06 & 2018 \\
+BiSeNetV2 & BiSeNetV2 & 66.53 & 76.32 & 98.08 & 98.28 & 14.821 & 12.286 & 172.48 & 2021 \\
+DDRNet & DDRNet & 68.91 & 78.65 & 99.94 & 99.94 & 5.766 & 4.56 & 156.38 & 2022 \\
+RepViT & RepViT-M0.9 & 68.03 & 77.93 & 100.0 & 100.0 & 8.954 & 25.404 & 84.30 & 2024 \\
+\midrule
+\textbf{GasTwinFormer} & \textbf{MixTwinEncoder} & \textbf{74.47} & \textbf{83.63} & \textbf{100.0} & \textbf{100.0} & 3.348 & 3.428 & 114.9 & 2025 \\
+% \midrule
+% \multicolumn{10}{l}{\tiny $\uparrow$ indicates higher is better, $\downarrow$ indicates lower is better} \\
+\bottomrule
+\end{tabular}
+
+\end{document}

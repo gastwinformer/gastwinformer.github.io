@@ -1,0 +1,27 @@
+
+\documentclass[border=0pt]{standalone}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\begin{document}
+\noindent\scriptsize
+\begin{tabular}{@{}l|cccc@{}}
+\toprule
+\textbf{Configuration} & \textbf{\makecell{mIoU\\(\%)$\uparrow$}} & \textbf{\makecell{Diet Acc.\\(\%)$\uparrow$}} & \textbf{\makecell{Params\\(M)$\downarrow$}} & \textbf{\makecell{FLOPs\\(G)$\downarrow$}} \\
+\midrule
+\multicolumn{5}{l}{\textit{Loss Function Comparison}} \\
+\midrule
+Cross Entropy Loss & 73.69 & 98.70 & 3.348 & 3.508 \\
+Dice Loss & 72.57 & \textbf{100.0} & 3.348 & 3.508 \\
+Focal Loss & 70.33 & 98.65 & 3.348 & 3.508 \\
+Gaussian Plume Loss & \textbf{73.97} & 99.44 & 3.348 & 3.508 \\
+\midrule
+\multicolumn{5}{l}{\textit{LSA Window Size Optimization}} \\
+\midrule
+7×7 & 73.97 & 99.44 & 3.348 & 3.508 \\
+5×5 & \textbf{74.47} & \textbf{100.0} & 3.348 & 3.428 \\
+3×3 & 74.35 & \textbf{100.0} & 3.348 & \textbf{3.367} \\
+\bottomrule
+\end{tabular}
+\end{document}

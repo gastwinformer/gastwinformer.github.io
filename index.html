@@ -46,21 +46,22 @@
           </h2>
         </div>
         <div class="row text-center">
-          <div class="col-md-3"></div>
-          <div class="col-md-6 text-center">
-            <ul class="list-inline">
-              <li>Toqi Tahamid Sarker<sup>1</sup>*</li>
-              <li>Mohamed G Embaby<sup>2</sup>*</li>
-              <li>Taminul Islam<sup>1</sup></li>
-              <li>Amer AbuGhazaleh<sup>2</sup></li>
-              <li>Khaled R Ahmed<sup>1</sup></li>
-            </ul>
-          </div>
-          <div class="col-md-3"></div>
           <div class="col-md-12 text-center">
-            <sup>1</sup>School of Computing, <sup>2</sup>School of Agricultural Sciences — Southern Illinois University, Carbondale, USA &nbsp; &nbsp; * equal contribution
+            <p style="margin-bottom: 0;">
+              Toqi Tahamid Sarker<sup>1</sup>, 
+              Mohamed Embaby<sup>2</sup>, 
+              Taminul Islam<sup>1</sup>, 
+              Amer AbuGhazaleh<sup>1</sup>, 
+              Khaled R Ahmed<sup>1</sup>
+            </p>
           </div>
-          <div class="col-md-12 text-center">
+          <div class="col-md-12 text-center" style="margin-top: 8px;">
+            <sup>1</sup>Southern Illinois University Carbondale, USA &nbsp; &nbsp; <sup>2</sup>University of California, Davis, USA
+          </div>
+          <div class="col-md-12 text-center" style="margin-top: 8px;">
+            {toqitahamid.sarker, taminul.islam, aabugha, khaled.ahmed}@siu.edu, memaby@ucdavis.edu
+          </div>
+          <div class="col-md-12 text-center" style="margin-top: 12px;">
             ICCV 2025
           </div>
         </div>
@@ -74,10 +75,6 @@
             <a href="https://github.com/toqitahamid/GasTwinFormer" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
               <span class="icon"><i class="fab fa-github"></i></span>
               <span>Code</span>
-            </a>
-            <a href="./assets/paper.pdf" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
-              <span class="icon"><i class="fas fa-file-pdf"></i></span>
-              <span>Paper</span>
             </a>
           </span>
         </div>
@@ -120,13 +117,17 @@
     </div>
   </section>
 
-  <!-- ReconFusion-style centered teaser -->
+  <!-- Architecture Figure -->
   <section class="section">
     <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Architecture</h2>
       <div class="columns is-centered">
-        <div class="column is-four-fifths has-text-centered">
-          <img src="./assets/gastwinformer.png" alt="GasTwinFormer architecture" style="width:100%; max-width:1100px;" />
-          <p class="has-text-grey" style="margin-top:8px">GasTwinFormer architecture overview.</p>
+        <div class="column has-text-centered">
+          <img src="./assets/gastwinformer_v2.svg" alt="GasTwinFormer architecture" style="width:100%; max-width:1200px;" />
+          <p class="has-text-grey" style="margin-top:12px">
+            <strong>GasTwinFormer Architecture:</strong> Mix Twin Encoder alternates between Efficient Multi-head Attention (EMA) blocks with spatially-reduced global attention and Locally-grouped Self-Attention (LSA) blocks. 
+            Features from F1, F2, and F3 are aggregated by the LR-ASPP decoder for methane segmentation, while F4 feeds the dietary classification head.
+          </p>
         </div>
       </div>
     </div>
@@ -148,10 +149,23 @@
     </div>
   </section>
 
-  <!-- ReconFusion-style media row (swap videos/images as available) -->
+  <!-- Results Section -->
   <section class="section" id="results">
     <div class="container is-max-desktop">
       <h2 class="title is-3 has-text-centered">Results</h2>
+      
+      <!-- Accuracy vs Efficiency Comparison -->
+      <div class="columns is-centered" style="margin-bottom: 2rem;">
+        <div class="column is-four-fifths has-text-centered">
+          <img src="./assets/accuracy_efficiency_final.png" alt="Accuracy vs Efficiency comparison" style="width:100%; max-width:900px;" />
+          <p class="has-text-grey" style="margin-top:12px">
+            <strong>Accuracy vs Efficiency Trade-off:</strong> GasTwinFormer (blue) achieves the highest mIoU (74.47%) with minimal parameters (3.348M) and FLOPs (3.428G), 
+            outperforming both CNN-based methods (orange) and other vision transformers in the efficiency-accuracy space.
+          </p>
+        </div>
+      </div>
+
+      <!-- Performance Metrics -->
       <div class="columns is-centered">
         <div class="column">
           <div class="content">
@@ -173,45 +187,154 @@
         </div>
       </div>
 
-      <div class="content" style="margin-top:24px">
-        <h3 class="title is-4">Qualitative Visualizations</h3>
-        <p class="has-text-justified">Methane plume segmentation overlays across diets: MD (mixed diet), HG (high grain), HF (high forage). Methods: Ground Truth, BiSeNetV2, UperNet, GasFormer, SegFormer, Twins PCPVT-S, GasTwinFormer.</p>
-        <div class="columns">
-          <div class="column">
-            <h4 class="title is-5">MD</h4>
-            <div class="columns is-multiline is-variable is-1">
-              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_ground_truth_overlay.png" alt="MD GT"/></div>
-              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_bisennetv2_overlay.png" alt="MD BiSeNetV2"/></div>
-              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_upernet_overlay.png" alt="MD UperNet"/></div>
-              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_gasformer_overlay.png" alt="MD GasFormer"/></div>
-              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_segformer_overlay.png" alt="MD SegFormer"/></div>
-              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_twins_pcpvt_overlay.png" alt="MD Twins PCPVT"/></div>
-              <div class="column is-4"><img src="./assets/vis/MD/FLIR0388_frame_02473_gastwinformer_overlay.png" alt="MD GasTwinFormer"/></div>
-            </div>
+      <!-- Qualitative Results -->
+      <div class="columns is-centered" style="margin-top:48px">
+        <div class="column has-text-centered">
+          <h3 class="title is-4">Qualitative Comparisons</h3>
+          <img src="./assets/qualitative-results.png" alt="Qualitative segmentation results" style="width:100%; max-width:1200px;" />
+          <p class="has-text-grey" style="margin-top:12px">
+            <strong>Visual comparison of methane plume segmentation</strong> across three dietary treatments and seven methods. 
+            Rows show temporal progression of methane emission events. GasTwinFormer produces cleaner boundaries and better handles plume dispersion compared to baseline methods.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Demonstrations -->
+  <section class="section" id="videos" style="background-color: #fafafa;">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Video Demonstrations</h2>
+      <div class="content has-text-centered">
+        <p>Real-time methane plume segmentation results from GasTwinFormer across different dietary treatments. 
+        Yellow overlays indicate detected methane emissions from beef cattle.</p>
+      </div>
+
+      <!-- High Forage Diet Videos -->
+      <div class="content" style="margin-top: 2rem;">
+        <h3 class="title is-4">High Forage (HF)</h3>
+        <p class="has-text-grey">10 videos • High fiber diet with predominantly forage-based nutrition</p>
+        <div class="columns is-multiline is-variable is-2">
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0380.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0380</p>
           </div>
-          <div class="column">
-            <h4 class="title is-5">HG</h4>
-            <div class="columns is-multiline is-variable is-1">
-              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_ground_truth_overlay.png" alt="HG GT"/></div>
-              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_bisennetv2_overlay.png" alt="HG BiSeNetV2"/></div>
-              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_upernet_overlay.png" alt="HG UperNet"/></div>
-              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_gasformer_overlay.png" alt="HG GasFormer"/></div>
-              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_segformer_overlay.png" alt="HG SegFormer"/></div>
-              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_twins_pcpvt_overlay.png" alt="HG Twins PCPVT"/></div>
-              <div class="column is-4"><img src="./assets/vis/HG/FLIR0394_frame_16214_gastwinformer_overlay.png" alt="HG GasTwinFormer"/></div>
-            </div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0378.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0378</p>
           </div>
-          <div class="column">
-            <h4 class="title is-5">HF</h4>
-            <div class="columns is-multiline is-variable is-1">
-              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_ground_truth_overlay.png" alt="HF GT"/></div>
-              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_bisennetv2_overlay.png" alt="HF BiSeNetV2"/></div>
-              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_upernet_overlay.png" alt="HF UperNet"/></div>
-              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_gasformer_overlay.png" alt="HF GasFormer"/></div>
-              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_segformer_overlay.png" alt="HF SegFormer"/></div>
-              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_twins_pcpvt_overlay.png" alt="HF Twins PCPVT"/></div>
-              <div class="column is-4"><img src="./assets/vis/HF/FLIR0380_frame_06608_gastwinformer_overlay.png" alt="HF GasTwinFormer"/></div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0427.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0427</p>
+          </div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0384.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0384</p>
+          </div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0368.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0368</p>
+          </div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0371.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0371</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mixed Diet / Control Videos -->
+      <div class="content" style="margin-top: 3rem;">
+        <h3 class="title is-4">Mixed Diet (MD)</h3>
+        <p class="has-text-grey">5 videos • Balanced diet with mixed forage and concentrate</p>
+        <div class="columns is-multiline is-variable is-2">
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0388.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0388</p>
+          </div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0386.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0386</p>
+          </div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0393.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0393</p>
+          </div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0387.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0387</p>
             </div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0434.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0434</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- High Grain / Low Forage Videos -->
+      <div class="content" style="margin-top: 3rem;">
+        <h3 class="title is-4">High Grain (HG)</h3>
+        <p class="has-text-grey">4 videos • High energy diet with predominantly grain-based concentrate</p>
+        <div class="columns is-multiline is-variable is-2">
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0394.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0394</p>
+            </div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0396.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0396</p>
+          </div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0441.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0441</p>
+            </div>
+          <div class="column is-one-third">
+            <video controls preload="metadata" style="width:100%; border-radius: 6px;">
+              <source src="./assets/videos/FLIR0397.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="has-text-centered has-text-grey" style="font-size: 0.9rem; margin-top: 4px;">FLIR0397</p>
           </div>
         </div>
       </div>
@@ -225,6 +348,8 @@
       <div class="content">
         <p>Beef cattle methane emission dataset captured with a TELEDYNE FLIR Gx320 OGI camera in black-hot thermal mode, annotated for methane plume segmentation and labeled by dietary treatment.</p>
       </div>
+
+    
 
       <div class="columns is-multiline">
         <div class="column is-half">

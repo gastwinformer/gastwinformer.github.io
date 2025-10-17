@@ -1,0 +1,41 @@
+
+
+\documentclass[border=0pt]{standalone}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\begin{document}
+\noindent\scriptsize
+\begin{tabular}{@{}l|cccc@{}}
+\toprule
+\textbf{Configuration} & \textbf{\makecell{mIoU\\(\%)$\uparrow$}} & \textbf{\makecell{Diet Acc.\\(\%)$\uparrow$}} & \textbf{\makecell{Params\\(M)$\downarrow$}} & \textbf{\makecell{FLOPs\\(G)$\downarrow$}} \\
+\midrule
+\multicolumn{5}{l}{\textit{LR-ASPP Channel Scaling}} \\
+\midrule
+128 ch & \textbf{73.65} & \textbf{100.0} & \textbf{3.348} & \textbf{3.508} \\
+256 ch & 72.32 & \textbf{100.0} & 3.644 & 4.729 \\
+512 ch & 72.37 & \textbf{100.0} & 4.630 & 9.309 \\
+768 ch & 72.97 & 99.38 & 6.140 & 16.741 \\
+1024 ch & 73.03 & 99.77 & 8.174 & 27.025 \\
+2048 ch & 72.72 & \textbf{100.0} & 21.555 & 96.684 \\
+\midrule
+\multicolumn{5}{l}{\textit{Classification Feature Source}} \\
+\midrule
+Encoder Stage 4 & \textbf{73.65} & \textbf{100.0} & 3.348 & \textbf{3.508} \\
+Encoder Stage 3 & 69.52 & \textbf{100.0} & 3.323 & 3.508 \\
+Encoder Stage 2 & 71.91 & \textbf{100.0} & \textbf{3.299} & 3.508 \\
+\midrule
+\multicolumn{5}{l}{\textit{Hybrid Attention Pattern Analysis}} \\
+\midrule
+LE-LE-LE-LE & 73.65 & \textbf{100.0} & 3.348 & 3.508 \\
+EL-EL-EL-EL & \textbf{73.69} & 98.70 & 3.348 & 3.508 \\
+LL-LL-LL-LL & 68.97 & 98.59 & \textbf{3.113} & \textbf{3.214} \\
+EE-EE-EE-EE & 73.17 & \textbf{100.0} & 3.582 & 3.802 \\
+LL-LL-EE-EE & 70.56 & 99.77 & 3.319 & 3.259 \\
+EE-EE-LL-LL & 73.60 & \textbf{100.0} & 3.376 & 3.757 \\
+\bottomrule
+\end{tabular}
+\end{document}
+    
+    
